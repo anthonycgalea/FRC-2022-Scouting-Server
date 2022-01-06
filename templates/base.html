@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <title>{% block title %}{% endblock %}</title>
+    {% block head %}{% endblock %}
+  </head>
+  <body>
+    <div class="relative bg-white mb-6">
+      <div class="flex justify-between items-center border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10 md:mx-6">
+        <div class="flex justify-start flex:1">
+          <a href="#">
+            <img class="h-8 w-auto sm:h-10" src="{{ url_for('static', filename='logo.png') }}">
+          </a>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+          <div
+            class="flex justify-between items-center border-b-2 border-gray-100"
+          >
+            <a
+              href="/"
+              class="text-base font-medium text-gray-500 hover:text-gray-900"
+              >Trips</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="md:mx-6">
+    {% block body %}{% endblock %}
+    </div>
+  </body>
+</html>
