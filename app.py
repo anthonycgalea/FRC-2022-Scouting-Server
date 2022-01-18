@@ -43,15 +43,36 @@ class TeamMatch(db.Model):
     '''
     Database model for recording a team's performance in a match.
     '''
-    teamMatchId = db.Column(db.Integer, primary_key=True)
+    teamMatchId = db.Column(db.Integer, primary_key=True) #tuid
     matchNo = db.Column(db.Integer, db.ForeignKey('Match.matchNo'), nullable=False)
     teamNo = db.Column(db.Integer, db.ForeignKey('Team.teamNumber'), nullable=False)
     #TODO: Insert game-specfic data here
-
+    
+    #Autonomous
+    autoTaxi = db.Column(db.Integer) #this is an integer to make data handling in Tableau easier
+    autoLow = db.Column(db.Integer)
+    autoHigh = db.Column(db.Integer)
+    autoPickedUp = db.Column(db.Integer)
+    autoNotes = db.Column(db.String(255))
+    
+    #Teleop
+    teleLow = db.Column(db.Integer)
+    teleHigh = db.Column(db.Integer)
+    telePickedUp = db.Column(db.Integer)
+    didDefense = db.Column(db.Boolean)
+    teleDefense = db.Column(db.Integer)
+    teleNotes = db.Column(db.String(255))
+    
+    #Endgame
+    attemptedClimb = db.Column(db.Boolean)
+    levelClimbed = db.Column(db.Integer)
+    endgameNotes = db.Column(db.String(255))
+    
     #generic game data
     brokenBot = db.Column(db.Boolean)
     noShow = db.Column(db.Boolean)
-    notes = db.Column(db.String(255))
+    fouls = db.Column(db.Integer)
+    generalNotes = db.Column(db.String(255))
 
 class TeamPitScout(db.Model):
     '''
