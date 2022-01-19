@@ -102,3 +102,7 @@ def index():
     Flask method for returning homepage.
     '''
     return render_template("index.html")
+
+@app.route("/scoutMatch/<int:matchNo><int:teamNo>")
+def scoutMatch():
+    return render_template("matchScout.html")
