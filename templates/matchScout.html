@@ -9,7 +9,9 @@
 
 <head>
 <style>
-	th, td {text-align: center; vertical-align: middle; font-size: 30px;} 
+	th, td {
+    text-align: center; vertical-align: middle; font-size: 30px;
+  } 
   input.largerCheckbox {
             width: 40px;
             height: 40px;
@@ -23,7 +25,7 @@
     <th>Team no:</th>
     <th>TEAM</th>
   </tr>
-  <tr id="0">
+  <tr>
     <th colspan="4">Autonomous Scouting</th>
   </tr>
   <tr id="1">
@@ -44,15 +46,15 @@
     <td>0</td>
     <td><button class="btn btn-danger btn-lg">-</button></td>
   </tr>
-  <tr id="4">
+  <tr id="tarmac">
     <th><label for="tarmac">Left Tarmac</label></th>
     <td colspan="3"><input type="checkbox" class="largerCheckbox" name="tarmac" value="tarmac"></input></td>
   </tr>
-  <tr id="5">
+  <tr id="autoNotes">
     <th>Autonomous Notes</th>
     <td colspan="3"><input type="text"></input></td>
   </tr>
-  <tr id="6">
+  <tr>
     <th colspan="4">Teleop Scouting</th>
   </tr>
   <tr id="7">
@@ -73,18 +75,18 @@
     <td>0</td>
     <td><button class="btn btn-danger btn-lg">-</button></td>
   </tr>
-  <tr id="10">
+  <tr id="defense">
     <th><label for="tarmac">Played Defense?</label></th>
     <td colspan="3"><input type="checkbox" class="largerCheckbox" name="defense" value="defense"></input></td>
   </tr>
-  <tr id="11">
+  <tr id="teleNotes">
     <th>Teleop Notes</th>
     <td colspan="3"><input type="text"></input></td>
   </tr>
-  <tr id="12">
+  <tr>
     <th colspan="4">Endgame Scouting</th>
   </tr>
-  <tr id="13">
+  <tr id="attemptClimb">
     <th><label for="tarmac">Attempted to Climb?</label></th>
     <td colspan="3"><input type="checkbox" class="largerCheckbox" name="climb" value="climb"></input></td>
   </tr>
@@ -93,19 +95,19 @@
     <td><button class="btn btn-success btn-lg">+</button></td>
     <td>0</td>
     <td><button class="btn btn-danger btn-lg">-</button></td>  </tr>
-  <tr id="15">
+  <tr id="endNotes">
     <th>Endgame Notes</th>
     <td colspan="3"><input type="text"></input></td>
   </tr>
-  <tr id="16">
+  <tr id="brokenBot">
     <th><label for="tarmac">Bot broken?</label></th>
     <td colspan="3"><input type="checkbox" class="largerCheckbox" name="broken" value="broken"></input></td>
   </tr>
-  <tr id="17">
+  <tr id="noShow">
     <th><label for="tarmac">No show for match?</label></th>
     <td colspan="3"><input type="checkbox" class="largerCheckbox" name="noshow" value="noshow"></input></td>
   </tr>
-  <tr id="18">
+  <tr id="fouls">
     <th>Fouls committed</th>
     <td><button class="btn btn-success btn-lg">+</button></td>
     <td>0</td>
@@ -121,17 +123,55 @@
   </tr>
 </table>
 <script>
-// you don't have to define the function before you use it! 
-function add1 (elem) {
- 
+
+elem = document.getElementById("submit");
+elem.children[1].onclick = function(){submitMatch()}; 
+
+function add1 (id, max) {
+    var currentTally;
+    let totals=document.getElementById(id);
+    if (Number.parseInt(totals) < max) {
+      currentTally = totals+1
+    }
+    updateCurrentMatch(id);
 }
 
-function subtract1 (elem) {
+function subtract1 (id, min) {
   
 }
 
-function submitMatch(elem) {
 
+function addMatch() {
+  pass;
 }
+
+function matchHistory() {
+  if (localStorage.getItem("matchHistory")) {
+    matchHistory = JSON.parse(localStorage.getItem("matchHistory"));
+  } else {
+    matchHistory = []
+    addMatch();
+  }
+}
+
+function loadOldMatch() {
+  if (localStorage.getItem("currentMatch")) {
+    currentMatch = JSON.parse(localStorage.getItem("currentMatch"));
+  } else {
+      addMatch();
+  }
+}
+
+function updateCurrentMatch(id) {
+  currentMatch[id]=document.getElementById(id);
+  localStorage.setItem("currentMatch", JSON.stringify(currentMatch));
+}
+
+function submitMatch() {
+  matchHistory.push(currentMatch);
+  localStorage.removeItem("currentMatch");
+  window.location.href = "index.html";
+}
+
 </script>
 </body>
