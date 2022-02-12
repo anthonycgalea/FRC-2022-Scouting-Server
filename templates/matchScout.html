@@ -28,92 +28,92 @@
   <tr>
     <th colspan="4">Autonomous Scouting</th>
   </tr>
-  <tr id="1">
+  <tr id="autoLow">
     <th>Autonomous Low Goals</th>
     <td><button class="btn btn-success btn-lg">+</button></td>
-    <td>0</td>
+    <td id="2">0</td>
     <td><button class="btn btn-danger btn-lg">-</button></td>
   </tr>
-  <tr id="2">
+  <tr id="autoHigh">
     <th>Autonomous High Goals</th>
     <td><button class="btn btn-success btn-lg">+</button></td>
-    <td>0</td>
+    <td id="3">0</td>
     <td><button class="btn btn-danger btn-lg">-</button></td>
   </tr>
-  <tr id="3">
+  <tr id="autoExtra">
     <th>Autonomous Extra Balls Picked Up</th>
     <td><button class="btn btn-success btn-lg">+</button></td>
-    <td>0</td>
+    <td id="4">0</td>
     <td><button class="btn btn-danger btn-lg">-</button></td>
   </tr>
   <tr id="tarmac">
     <th><label for="tarmac">Left Tarmac</label></th>
-    <td colspan="3"><input type="checkbox" class="largerCheckbox" name="tarmac" value="tarmac"></input></td>
+    <td colspan="3"><input type="checkbox" class="largerCheckbox" name="tarmac" value="tarmac" id="5"></input></td>
   </tr>
   <tr id="autoNotes">
     <th>Autonomous Notes</th>
-    <td colspan="3"><input type="text"></input></td>
+    <td colspan="3"><input type="text" id="6"></input></td>
   </tr>
   <tr>
     <th colspan="4">Teleop Scouting</th>
   </tr>
-  <tr id="7">
+  <tr id="teleLow">
     <th>Teleop Low Goals</th>
     <td><button class="btn btn-success btn-lg">+</button></td>
-    <td>0</td>
+    <td id="7">0</td>
     <td><button class="btn btn-danger btn-lg">-</button></td>
   </tr>
-  <tr id="8">
+  <tr id="teleHigh">
     <th>Teleop High Goals</th>
     <td><button class="btn btn-success btn-lg">+</button></td>
-    <td>0</td>
+    <td id="8">0</td>
     <td><button class="btn btn-danger btn-lg">-</button></td>
   </tr>
-  <tr id="9">
+  <tr id="teleExtra">
     <th>Teleop Extra Balls Picked Up</th>
     <td><button class="btn btn-success btn-lg">+</button></td>
-    <td>0</td>
+    <td id="9">0</td>
     <td><button class="btn btn-danger btn-lg">-</button></td>
   </tr>
   <tr id="defense">
     <th><label for="tarmac">Played Defense?</label></th>
-    <td colspan="3"><input type="checkbox" class="largerCheckbox" name="defense" value="defense"></input></td>
+    <td colspan="3"><input type="checkbox" class="largerCheckbox" name="defense" value="defense" id="10"></input></td>
   </tr>
   <tr id="teleNotes">
     <th>Teleop Notes</th>
-    <td colspan="3"><input type="text"></input></td>
+    <td colspan="3"><input type="text" id="11"></input></td>
   </tr>
   <tr>
     <th colspan="4">Endgame Scouting</th>
   </tr>
   <tr id="attemptClimb">
     <th><label for="tarmac">Attempted to Climb?</label></th>
-    <td colspan="3"><input type="checkbox" class="largerCheckbox" name="climb" value="climb"></input></td>
+    <td colspan="3"><input type="checkbox" class="largerCheckbox" name="climb" value="climb" id="12"></input></td>
   </tr>
-  <tr id="14">
+  <tr id="levelClimbed">
     <th>Level climbed to</th>
     <td><button class="btn btn-success btn-lg">+</button></td>
-    <td>0</td>
+    <td id="13">0</td>
     <td><button class="btn btn-danger btn-lg">-</button></td>  </tr>
   <tr id="endNotes">
     <th>Endgame Notes</th>
-    <td colspan="3"><input type="text"></input></td>
+    <td colspan="3"><input type="text" id="14"></input></td>
   </tr>
   <tr id="brokenBot">
     <th><label for="tarmac">Bot broken?</label></th>
-    <td colspan="3"><input type="checkbox" class="largerCheckbox" name="broken" value="broken"></input></td>
+    <td colspan="3"><input type="checkbox" class="largerCheckbox" name="broken" value="broken" id="15"></input></td>
   </tr>
   <tr id="noShow">
     <th><label for="tarmac">No show for match?</label></th>
-    <td colspan="3"><input type="checkbox" class="largerCheckbox" name="noshow" value="noshow"></input></td>
+    <td colspan="3"><input type="checkbox" class="largerCheckbox" name="noshow" value="noshow" id="16"></input></td>
   </tr>
   <tr id="fouls">
     <th>Fouls committed</th>
     <td><button class="btn btn-success btn-lg">+</button></td>
-    <td>0</td>
+    <td id="17">0</td>
     <td><button class="btn btn-danger btn-lg">-</button></td>  </tr>
   </tr>
-  <tr id="19">
+  <tr id="genNotes">
     <th>General Notes</th>
     <td colspan="3"><input type="text"></input></td>
   </tr>
@@ -125,19 +125,65 @@
 <script>
 
 elem = document.getElementById("submit");
-elem.children[1].onclick = function(){submitMatch()}; 
+elem.children[1].onclick = function(){submitMatch()};
+
+var currentMatch = loadCurrentMatch();
+
+document.getElementById("autoLow").children[1].onclick = function(){add1(2, 7)};
+document.getElementById("autoLow").children[3].onclick = function(){subtract1(2, 0)};
+
+document.getElementById("autoHigh").children[1].onclick = function(){add1(3, 7)};
+document.getElementById("autoHigh").children[3].onclick = function(){subtract1(3, 0)};
+
+document.getElementById("autoExtra").children[1].onclick = function(){add1(4, 5)};
+document.getElementById("autoExtra").children[3].onclick = function(){subtract1(4, 0)};
+
+document.getElementById("teleLow").children[1].onclick = function(){add1(7, 40)};
+document.getElementById("teleLow").children[3].onclick = function(){subtract1(7, 0)};
+
+document.getElementById("teleHigh").children[1].onclick = function(){add1(8, 40)};
+document.getElementById("teleHigh").children[3].onclick = function(){subtract1(8, 0)};
+
+document.getElementById("teleExtra").children[1].onclick = function(){add1(9, 40)};
+document.getElementById("teleExtra").children[3].onclick = function(){subtract1(9, 0)};
+
+document.getElementById("levelClimbed").children[0].onclick = function(){add1(13, 4)};
+document.getElementById("levelClimbed").children[2].onclick = function(){subtract1(13, 0)};
+
+document.getElementById("fouls").children[0].onclick = function(){add1(17, 5)};
+document.getElementById("fouls").children[2].onclick = function(){subtract1(17, 0)};
+
+function loadCurrentMatch() {
+  if (localStorage.getItem("currentMatch")) {
+    currentMatch = localStorage.getItem("currentMatch"); 
+  } else {
+    resetMatch();
+    currentMatch = localStorage.getItem("currentMatch");
+  }
+  return currentMatch;
+}
+
+function resetMatch() {
+  match = [];
+  match.push()
+}
 
 function add1 (id, max) {
     var currentTally;
-    let totals=document.getElementById(id);
-    if (Number.parseInt(totals) < max) {
-      currentTally = totals+1
+    let totals=Number.parseInt(document.getElementById(id).innerHTML);
+    if (totals < max) {
+      currentTally = totals+1;
     }
     updateCurrentMatch(id);
 }
 
 function subtract1 (id, min) {
-  
+    var currentTally;
+    let totals=Number.parseInt(document.getElementById(id).innerHTML);
+    if (totals > min) {
+      currentTally = totals-1;
+    }
+    updateCurrentMatch(id);
 }
 
 
@@ -149,7 +195,7 @@ function matchHistory() {
   if (localStorage.getItem("matchHistory")) {
     matchHistory = JSON.parse(localStorage.getItem("matchHistory"));
   } else {
-    matchHistory = []
+    matchHistory = [];
     addMatch();
   }
 }
@@ -163,13 +209,14 @@ function loadOldMatch() {
 }
 
 function updateCurrentMatch(id) {
-  currentMatch[id]=document.getElementById(id);
+  currentMatch[id]=Number.parseInt(document.getElementById(id).innerHTML);
   localStorage.setItem("currentMatch", JSON.stringify(currentMatch));
 }
 
 function submitMatch() {
   matchHistory.push(currentMatch);
   localStorage.removeItem("currentMatch");
+  resetMatch();
   window.location.href = "index.html";
 }
 
